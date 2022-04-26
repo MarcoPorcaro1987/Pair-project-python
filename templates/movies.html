@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+  </head>
+
+  <body>
+    <input
+      id="movie-bar"
+      type="text"
+      onkeypress="handle(event)"
+      placeholder="Search the movie"
+    />
+    <input id="search" type="button" value="search" onClick="search_func()" />
+    <h1>Popular film</h1>
+    <div class="container">
+      {% block content %} {% for movie in movies %}
+      <div class="card-container">
+        <p>{{movie.title}}</p>
+        <div
+          id="movie"
+          style="background-image: url(http://image.tmdb.org/t/p/w500{{movie.backdrop_path}});"
+        ></div>
+      </div>
+      {% endfor %} {% endblock %}
+    </div>
+  </body>
+
+  <style>
+    h1 {
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    .card-container {
+    }
+    #movie {
+      width: 400px;
+      height: 250px;
+      margin: 10px;
+      border-radius: 7px;
+      box-shadow: 0px 0px 5px grey;
+      background-size: cover;
+    }
+  </style>
+
+  <script>
+ 
+
+    function search_func() {
+      movie = document.getElementById("movie-bar").value;
+      //write your specific code from here
+      const query = movie;
+      const url =`https://api.themoviedb.org/3/search/movie?api_key=50141624ddf0cbc57d2265f68b3291e9ab&language=en-US&query=${query}&page=1&include_adult=false`;
+      alert("You are searching: " + movie);
+    }
+
+    function handle(e) {
+      address = document.getElementById("movie-bar").value;
+      if (e.keyCode === 13) {
+        alert("You are searching: " + movie);
+      }
+      return false;
+    }
+  </script>
+  
+</html>
